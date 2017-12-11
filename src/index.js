@@ -1,23 +1,41 @@
-import { cube } from './math.js';
-import _ from 'lodash';
+// import { cube } from './math.js';
+// import _ from 'lodash';
 
-// 配置里添加DefinePlugin插件后，任何位于 /src 的本地代码如都可以关联到 process.env.NODE_ENV 环境变量,
-if (process.env.NODE_ENV !== 'production') {
-   console.log(
-     _.join(['开发环境!','asa', 'module', 'loaded!'], ' ')
-   );
-}
+console.log('环境变量：',process.env.NODE_ENV)
 
-function component() {
+
+function getComponent() {
+
+	 return import(/* webpackChunkName: "lodash" */ 'lodash').then( _ => {
+
+	   var element = document.createElement('div');
+	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+	   return element;
 	
-	var element = document.createElement('pre');
+	 }).catch(error => 'An error occurred while loading the component');
 
-	element.innerHTML = [
-	  'Hello webpack!',
-	  '5 cubed is equal to ' + cube(5)
-	].join('\n\n');
-
-	return element;
 }
 
-document.body.appendChild(component());
+// 如果你已经通过类似 babel 的预处理器(pre-processor)启用 async 函数，可如下代替上个函数
+// async function getComponent() {
+
+// 	   var element = document.createElement('div');
+// 	   const _ = await import( webpackChunkName: "lodash"  'lodash');
+	
+// 	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+// 	   return element;
+// }
+
+
+
+
+
+
+
+
+
+getComponent().then(component => {
+  document.body.appendChild(component);
+})
+
+

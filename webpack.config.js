@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 // 自动创建html
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,20 +10,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
-    another: './src/another-module.js'
+    index: './src/index.js'
+    // , another: './src/another-module.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Code Splitting'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-       name: 'common' 
     })
+    // , new webpack.optimize.CommonsChunkPlugin({
+    //    name: 'common' 
+    // })
 
   ],
   output: {
     filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   }
  
