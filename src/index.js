@@ -1,20 +1,38 @@
-// import { cube } from './math.js';
-// import _ from 'lodash';
+import _ from 'lodash';
 
-console.log('环境变量：',process.env.NODE_ENV)
+function component() {
+    var element = document.createElement('div');
+	  var button = document.createElement('button');
+	  var br = document.createElement('br');
+	  button.innerHTML = 'Click me and look at the console!';
 
+	  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+	  element.appendChild(br);
+	  element.appendChild(button);
 
-function getComponent() {
+	  // Note that because a network request is involved, some indication
+	  // of loading would need to be shown in a production-level site/app.
+	  	button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+		    var print = module.default;
+		    print();
+		});
 
-	 return import(/* webpackChunkName: "lodash" */ 'lodash').then( _ => {
+    return element;
+ }
 
-	   var element = document.createElement('div');
-	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-	   return element;
+ document.body.appendChild(component());
+
+// function getComponent() {
+
+// 	 return import(/* webpackChunkName: "lodash" */ 'lodash').then( _ => {
+
+// 	   var element = document.createElement('div');
+// 	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+// 	   return element;
 	
-	 }).catch(error => 'An error occurred while loading the component');
+// 	 }).catch(error => 'An error occurred while loading the component');
 
-}
+// }
 
 // 如果你已经通过类似 babel 的预处理器(pre-processor)启用 async 函数，可如下代替上个函数
 // async function getComponent() {
@@ -28,14 +46,8 @@ function getComponent() {
 
 
 
-
-
-
-
-
-
-getComponent().then(component => {
-  document.body.appendChild(component);
-})
+// getComponent().then(component => {
+//   document.body.appendChild(component);
+// })
 
 
