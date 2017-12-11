@@ -1,25 +1,18 @@
-import _ from 'lodash';
-import printMe from './print.js';
-// import './style.css';
-// import Icon from './icon.png';
-// import Data from './data.xml';
+import { cube } from './math.js';
 
+// 配置里添加DefinePlugin插件后，任何位于 /src 的本地代码如都可以关联到 process.env.NODE_ENV 环境变量,
+if (process.env.NODE_ENV !== 'production') {
+   console.log('开发环境!');
+}
 
 function component() {
 	
-	var element = document.createElement('div');
-	element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+	var element = document.createElement('pre');
 
-	// element.classList.add('hello');
-	// var myImg = new Image();
-	// myImg.src = Icon; 
-	// element.appendChild(myImg);
-	// console.log(Data);
-
-	var btn = document.createElement('button');
-	btn.innerHTML='click me';
-	btn.onclick= printMe;
-	element.appendChild(btn)
+	element.innerHTML = [
+	  'Hello webpack!',
+	  '5 cubed is equal to ' + cube(5)
+	].join('\n\n');
 
 	return element;
 }

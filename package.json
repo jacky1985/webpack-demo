@@ -4,10 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "watch": "webpack --progress --watch",
-    "start": "webpack-dev-server --open",
-    "server": "node server.js",
-    "build": "webpack"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +20,7 @@
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
