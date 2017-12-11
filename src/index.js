@@ -1,8 +1,11 @@
 import { cube } from './math.js';
+import _ from 'lodash';
 
 // 配置里添加DefinePlugin插件后，任何位于 /src 的本地代码如都可以关联到 process.env.NODE_ENV 环境变量,
 if (process.env.NODE_ENV !== 'production') {
-   console.log('开发环境!');
+   console.log(
+     _.join(['开发环境!','asa', 'module', 'loaded!'], ' ')
+   );
 }
 
 function component() {
