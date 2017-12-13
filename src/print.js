@@ -1,10 +1,3 @@
-// export default function printMe() {
-//   // console.log('I get calfrom print.js!');
-//   console.log('sad.sadsad..')
-// }
-
-console.log('The print.js module has loaded! See the network tab in dev tools...');
-
-export default () => {
-  console.log('Buttonas----\'s "some text"!');
+export default (x) => {
+  console.log(x+'asd');
 }

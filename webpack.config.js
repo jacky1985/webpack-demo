@@ -6,23 +6,31 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 清理dist不用的文件   
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    index: './src/index.js'
-    // , another: './src/another-module.js'
+    main: './src/index.js'
+    ,vendor: [
+       'lodash'
+     ]
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Code Splitting'
     })
-
-    // 代码分离-防止重复
-    // , new webpack.optimize.CommonsChunkPlugin({
-    //    name: 'common' 
-    // })
+    //缓存 - 防止vendor随其他新模块添加修改 引起HASH变化
+    // ,new webpack.HashedModuleIdsPlugin()  //适合生产环境
+    // ,new webpack.NamedModulesPlugin()
+    //缓存 -提取模板   
+    ,new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'       // 对应entry.vendor
+    })
+    // 代码分离-防止重复 
+    ,new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime'
+    })
 
   ],
   output: {

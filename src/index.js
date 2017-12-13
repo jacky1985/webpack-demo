@@ -1,53 +1,14 @@
 import _ from 'lodash';
+import Print from './print';
 
 function component() {
     var element = document.createElement('div');
-	  var button = document.createElement('button');
-	  var br = document.createElement('br');
-	  button.innerHTML = 'Click me and look at the console!';
 
-	  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-	  element.appendChild(br);
-	  element.appendChild(button);
+        // lodash 是由当前 script 脚本 import 导入进来的
+        element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    	element.onclick = Print.bind(null, 'Heasdpa');
 
-	  // Note that because a network request is involved, some indication
-	  // of loading would need to be shown in a production-level site/app.
-	  	button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
-		    var print = module.default;
-		    print();
-		});
-
-    return element;
+        return element;
  }
 
  document.body.appendChild(component());
-
-// function getComponent() {
-
-// 	 return import(/* webpackChunkName: "lodash" */ 'lodash').then( _ => {
-
-// 	   var element = document.createElement('div');
-// 	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-// 	   return element;
-	
-// 	 }).catch(error => 'An error occurred while loading the component');
-
-// }
-
-// 如果你已经通过类似 babel 的预处理器(pre-processor)启用 async 函数，可如下代替上个函数
-// async function getComponent() {
-
-// 	   var element = document.createElement('div');
-// 	   const _ = await import( webpackChunkName: "lodash"  'lodash');
-	
-// 	   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-// 	   return element;
-// }
-
-
-
-// getComponent().then(component => {
-//   document.body.appendChild(component);
-// })
-
-
